@@ -1,0 +1,38 @@
+// Prisma schema that works for both SQLite (local dev) and PostgreSQL (Vercel/Neon)
+// For local development, use: DATABASE_URL="file:./dev.db"
+// For Vercel deployment, use Neon PostgreSQL URL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  fullName  String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sessions  ExamSession[]
+}
+
+model ExamSession {
+  id             String    @id @default(cuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  examType       String    @default("psaj_ips_9_2026")
+  answers        String    @default("{}")
+  score          Float     @default(0)
+  totalQuestions  Int      @default(0)
+  correctAnswers  Int      @default(0)
+  startTime      DateTime?
+  endTime        DateTime?
+  completed      Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
