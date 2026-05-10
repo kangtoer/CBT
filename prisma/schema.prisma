@@ -1,14 +1,15 @@
-// Prisma schema that works for both SQLite (local dev) and PostgreSQL (Vercel/Neon)
-// For local development, use: DATABASE_URL="file:./dev.db"
-// For Vercel deployment, use Neon PostgreSQL URL
+// PRODUCTION SCHEMA - Gunakan file ini saat deploy ke Vercel + Neon
+// Cara pakai: Salin isi file ini ke prisma/schema.prisma sebelum push ke GitHub
+// Atau ganti secara otomatis via CI/CD
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
