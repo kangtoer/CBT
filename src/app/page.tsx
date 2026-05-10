@@ -1157,7 +1157,6 @@ function ExamView() {
                 question={currentQuestion as MenjodohkanQuestion}
                 currentAnswers={(answers[currentQuestion.id] as Record<string, string>) || {}}
                 onAnswerChange={(ans) => {
-                  setMatchingAnswers(ans);
                   setAnswer(currentQuestion.id, ans);
                 }}
               />

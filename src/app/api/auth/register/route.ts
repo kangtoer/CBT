@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { hash, compare } from "crypto";
 
 async function hashPassword(password: string): Promise<string> {
   const encoder = new TextEncoder();
