@@ -1,2 +1,0 @@
-# CBT
-Computerized Based System
